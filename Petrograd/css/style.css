@@ -1,0 +1,269 @@
+header{
+    margin: 0;
+    padding: 10px;
+    margin-bottom: 15px;
+    width:100%;
+    text-align: left;
+    color: #fbfbe1;
+    font-size: 25px;
+    font-weight: bold;
+    background-color: #430b0e;
+}
+nav{
+    display: none;
+}
+body{
+    background-color: #fbfbe1;
+    overflow-x: hidden;
+}
+.title-menu{
+    padding: 5px;
+   font-size: 30px;
+    color: #430b0e;
+}
+.container-starter, .container-main, .container-dessert, .container-drinks, .container-sideorders{
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(18em,1fr));
+        grid-gap: 1em;
+    }
+.starter, .main, .dessert, .drinks, .sideorders{
+    position: relative;
+    border: 1px solid #430b0e;
+    padding: 10px;
+    margin: 40px;
+    text-align: center;
+    background-color: #fbfbe1;
+}
+.image{
+    background-image: url(/imgs/sold-2.png);
+    background-repeat: no-repeat;
+    background-size: contain;
+    
+}
+.sold-out{
+    opacity: 0.4;
+}
+img{
+    display: block;
+    width: 100%;
+}
+.name{
+    font-size: 25px;
+    padding: 25px;
+    margin: 0;
+    color: #430b0e;
+}
+.discount{
+    font-size: 25px;
+    border: 3px solid #430b0e;
+}
+.old-price{
+    font-size: 20px;
+    text-decoration-line: line-through;
+    color: #430b0e;
+}
+ol{
+    list-style-type: none;
+    padding: 0;
+    color: #430b0e;
+}
+li{
+    display: inline-block;
+    font-size: 30px;
+}
+h4{
+    padding: 0;
+    margin: 0;
+}
+.vege{
+    color: green;
+}
+.alco{
+    color: red;
+    margin-bottom: 10px;
+}
+.price{
+    position: relative;
+    text-align: center;
+    padding: 5px;
+    font-size: 30px;
+    color: #430b0e;
+}
+.modal{
+    display: none;
+    position: fixed;
+    z-index: 1;
+    width: 100%;
+    top: 20px;
+    overflow: auto;
+}
+.modal-content{
+    background-color: #fefefe;
+    margin: auto;
+    padding: 20px;
+    width: 80%;
+}
+.close{
+    position: fixed;
+    color: black;
+    font-size: 30px;
+    font-weight: bold;
+}
+.close:hover,.close:focus{
+    color: black;
+    text-decoration: none;
+    cursor: pointer;
+}
+.description{
+    background: white;
+    display: grid;
+    grid-template-columns: 1fr .5fr;
+}
+.image-desc{
+    position: relative;
+    width: 90%;
+}
+
+.name-description{
+    text-align: center;
+    color: #430b0e;
+    padding-right: 7px;
+}
+.star-description{
+    text-align: center;
+}
+.star-description li{
+    font-size: 20px;
+}
+p{
+    grid-column: span 2;
+    color: #430b0e;
+}
+.price-desc{
+    text-align: right;
+    color: #430b0e;
+    padding: 12px;
+    font-size: 20px;
+}
+.allergens{
+    padding: 0;
+    display: inline;
+    color: #430b0e;
+}
+.allergens li{
+    font-size: 17px;
+}
+footer{
+    padding: 5px;
+    text-align: center;
+    color: #fbfbe1;
+    background-color: #430b0e;
+    width: 100%;
+}
+
+@media screen and (min-width: 500px){
+   
+    .container-starter, .container-main, .container-dessert, .container-drinks, .container-sideorders{
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(15em,1fr));
+        grid-gap: .5em;
+    }
+    .title-menu{
+        padding-top: 10px;
+        font-size: 40px;
+        grid-column: 1/-1;
+    }
+    .modal{
+    display: none;
+    position: fixed;
+    z-index: 1;
+    width: 70%;
+    left: 10%;
+    padding: 40px;
+    overflow: auto;
+}
+    p{
+        font-size: 20px;
+    }
+    .allergens, .allergens li{
+        font-size: 20px;
+    }
+    .price-desc{
+        font-size: 35px;
+    }
+}
+@media screen and (min-width: 900px){
+   
+    nav{
+        display: inline-block;
+    color: #fbfbe1;
+    background-color: #430b0e;
+}
+nav ul{
+    position: absolute;
+    display: inline-block;
+    top: 0;
+    right: 0;
+    margin-top: 13px;
+    padding: 0;
+    text-align: right;
+    color: #fbfbe1;
+    font-weight: bold;
+    background-color: #430b0e;
+}
+nav li{
+    padding: 5px;
+    padding-right: 50px;
+    padding-left: 10px;
+    font-size: 25px;
+}
+    .container-starter, .container-main, .container-dessert, .container-drinks, .container-sideorders{
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(18em,1fr));
+        grid-gap: 1em;
+        overflow-x: hidden;
+    }
+    .title-menu{
+        font-size: 50px;
+        grid-column: 1/-1;
+    }
+    .modal{
+    display: none;
+    position: fixed;
+    z-index: 1;
+    width: 70%;
+    left: 10%;
+    padding: 50px;
+    overflow: auto;
+}
+}
+@media screen and (min-width: 1200px){
+   
+    .container-starter, .container-main, .container-dessert, .container-drinks, .container-sideorders{
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(18em, 1fr));
+        grid-gap: 1em;
+        overflow-x: hidden;
+    }
+    .title-menu{
+        grid-column: 1/-1;
+    }
+    .modal{
+    display: none;
+    position: fixed;
+    z-index: 1;
+    width: 70%;
+    left: 10%;
+    padding: 70px;
+    overflow: auto;
+}
+    p{
+        font-size: 30px;
+    }
+    .allergens, .allergens li{
+        font-size: 30px;
+    }
+    .price-desc{
+        font-size: 40px;
+    }
+}
