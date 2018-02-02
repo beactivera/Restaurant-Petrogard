@@ -21,12 +21,12 @@ body{
    font-size: 30px;
     color: #430b0e;
 }
-.container{
+.container-starter, .container-main, .container-dessert, .container-drinks, .container-sideorders{
         display: grid;
         grid-template-columns: repeat(auto-fill, minmax(18em,1fr));
         grid-gap: 1em;
     }
-.meal{
+.starter, .main, .dessert, .drinks, .sideorders{
     position: relative;
     border: 1px solid #430b0e;
     padding: 10px;
@@ -163,7 +163,7 @@ footer{
 
 @media screen and (min-width: 500px){
    
-    .container{
+    .container-starter, .container-main, .container-dessert, .container-drinks, .container-sideorders{
         display: grid;
         grid-template-columns: repeat(auto-fill, minmax(15em,1fr));
         grid-gap: .5em;
@@ -217,7 +217,7 @@ nav li{
     padding-left: 10px;
     font-size: 25px;
 }
-    .container{
+    .container-starter, .container-main, .container-dessert, .container-drinks, .container-sideorders{
         display: grid;
         grid-template-columns: repeat(auto-fill, minmax(18em,1fr));
         grid-gap: 1em;
@@ -239,7 +239,7 @@ nav li{
 }
 @media screen and (min-width: 1200px){
    
-    .container{
+    .container-starter, .container-main, .container-dessert, .container-drinks, .container-sideorders{
         display: grid;
         grid-template-columns: repeat(auto-fill, minmax(18em, 1fr));
         grid-gap: 1em;

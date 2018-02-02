@@ -1,71 +1,27 @@
-/////////////////////////dynamic////////////////////////////////////////////////
-let mealsContainer = document.querySelector('#meals');
+let btn = document.querySelectorAll("#myBtn");
 
-const template = document.querySelector('#mealTemplate').content;
-const link = "http://kea-alt-del.dk/t5/api/productlist";
-const imglink = "http://kea-alt-del.dk/t5/site/imgs/"
+btn.forEach(setupClick);
 
-fetch(link).then(result => result.json()).then(productlist => show(productlist));
-
-
-function show(data) {
-    data.forEach(elem => {
-        console.log(elem.name);
-        const clone = template.cloneNode(true);
-        clone.querySelector('img').src = imglink + "small/" + elem.image + "-sm.jpg";
-        clone.querySelector('.name').textContent = elem.name;
-        clone.querySelector('.price').textContent = elem.price;
-        clone.querySelector('.short-description').textContent = elem.shortdescription;
-        if (elem.category === 'starter') {
-            clone.querySelector("#container-category").textContent = "STARTER";
-            clone.querySelector("#container-category").classList.add = "title-menu";
-        } else if (elem.category === 'main') {
-            clone.querySelector("#container-category").innerHTML = "<div>MAIN</div>";
-            clone.querySelector("#container-category").classList.add = "title-menu";
-        } else if (elem.category === 'dessert') {
-            clone.querySelector("#container-category").innerHTML = "<div>DESSERT</div>";
-            clone.querySelector("#container-category").classList.add = "title-menu";
-        } else if (elem.category === 'drinks') {
-            clone.querySelector("#container-category").innerHTML = "<div>DRINKS</div>";
-            clone.querySelector("#container-category").classList.add = "title-menu";
-        } else{
-            clone.querySelector("#container-category").innerHTML = "<div>SIDEORDERS</div>";
-            clone.querySelector("#container-category").classList.add = "title-menu";
-        }
-        mealsContainer.appendChild(clone);
-    })
+function setupClick(btn){
+    btn.addEventListener('click', btnClicked);
 }
 
-//////////////////////end of dynamic////////////////////////////////////////////
+function btnClicked(e){
+    console.log(e.target.nextSibling)
+    let modal = e.target.nextSibling;
+    modal.style.display = "block"
+}
 
-//let btn = document.querySelectorAll("#myBtn");
-//
-//btn.forEach(setupClick);
-//
-//function setupClick(btn){
-//    btn.addEventListener('click', btnClicked);
-//}
-//
-//function btnClicked(e){
-//    console.log(e.target.nextSibling)
-//    let modal = e.target.nextSibling;
-//    modal.style.display = "block"
-//}
-//
-//let closeBtns = document.querySelectorAll(".close");
-//closeBtns.forEach(setupClickClose);
-//
-//function setupClickClose(btn){
-//    btn.addEventListener("click", closeModal);
-//}
-//
-//function closeModal(e){
-//    e.target.parentElement.parentElement.style.display = "none";
-//}
+let closeBtns = document.querySelectorAll(".close");
+closeBtns.forEach(setupClickClose);
 
+function setupClickClose(btn){
+    btn.addEventListener("click", closeModal);
+}
 
-
-////////////////////////////////////////////////////////////////////////////
+function closeModal(e){
+    e.target.parentElement.parentElement.style.display = "none";
+}
 
 //let span = document.getElementsByClassName('close')[0];
 //let modal = document.getElementById('myModal');
