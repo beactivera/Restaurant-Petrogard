@@ -54,6 +54,7 @@ img{
     color: #430b0e;
 }
 .discount{
+    margin: 10px;
     font-size: 25px;
     border: 3px solid #430b0e;
 }

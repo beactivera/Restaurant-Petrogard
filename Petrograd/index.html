@@ -18,18 +18,26 @@
 </nav>
 
 <body>
+  <!-- why I can only add classes in html file in visible section but not ij JS using clone and option classList.add?  -->
+   <section id="categories" class="title-menu">
+   </section>
     <section id="meals" class="container">
     </section>
        
+       <template id=categoryTemplate>
+       <article id="category" class="category">
+       <h2> CATEGORY NAME</h2>
+        </article>
+    </template>
        <template id="mealTemplate">
-         <section id="container-category">
           <article id="meal" class="meal">
             <img>
-            <h2 class="name">NAME OF MEAL</h2>
+            <h4 class="discount">DISCOUNT</h4>
+            <h2 class="name">NAME OF MEAL<a class="vege"></a></h2>
+            <h4 class="alco"> ALCOHOL</h4>
             <h4 class="price">PRICE</h4>
             <p class="short-description">SHORT DESCRIPTION</p>
         </article> 
-           </section>
        </template>
 
         

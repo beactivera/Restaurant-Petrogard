@@ -1,37 +1,64 @@
 /////////////////////////dynamic////////////////////////////////////////////////
+let categoryContainer = document.querySelector('#categories');
+const catTemplate = document.querySelector('#categoryTemplate').content;
 let mealsContainer = document.querySelector('#meals');
-
 const template = document.querySelector('#mealTemplate').content;
+
+const linkCat = "http://kea-alt-del.dk/t5/api/categories"
 const link = "http://kea-alt-del.dk/t5/api/productlist";
-const imglink = "http://kea-alt-del.dk/t5/site/imgs/"
+const imglink = "http://kea-alt-del.dk/t5/site/imgs/";
+
+fetch(linkCat).then(result => result.json()).then(cats => categorize(cats));
+
+function categorize(cats) {
+    cats.forEach(cat => {
+        console.log(cat);
+        const cloneCat = catTemplate.cloneNode(true);
+        cloneCat.querySelector('h2').textContent = cat;
+
+        categoryContainer.appendChild(cloneCat);
+    })
+}
 
 fetch(link).then(result => result.json()).then(productlist => show(productlist));
-
 
 function show(data) {
     data.forEach(elem => {
         console.log(elem.name);
+        console.log(elem.category);
         const clone = template.cloneNode(true);
-        clone.querySelector('img').src = imglink + "small/" + elem.image + "-sm.jpg";
-        clone.querySelector('.name').textContent = elem.name;
-        clone.querySelector('.price').textContent = elem.price;
-        clone.querySelector('.short-description').textContent = elem.shortdescription;
-        if (elem.category === 'starter') {
-            clone.querySelector("#container-category").textContent = "STARTER";
-            clone.querySelector("#container-category").classList.add = "title-menu";
-        } else if (elem.category === 'main') {
-            clone.querySelector("#container-category").innerHTML = "<div>MAIN</div>";
-            clone.querySelector("#container-category").classList.add = "title-menu";
-        } else if (elem.category === 'dessert') {
-            clone.querySelector("#container-category").innerHTML = "<div>DESSERT</div>";
-            clone.querySelector("#container-category").classList.add = "title-menu";
-        } else if (elem.category === 'drinks') {
-            clone.querySelector("#container-category").innerHTML = "<div>DRINKS</div>";
-            clone.querySelector("#container-category").classList.add = "title-menu";
-        } else{
-            clone.querySelector("#container-category").innerHTML = "<div>SIDEORDERS</div>";
-            clone.querySelector("#container-category").classList.add = "title-menu";
+        if(elem.soldout === true){
+            clone.querySelector('.meal').style.opacity = "0.4";
+            clone.querySelector('.meal').classList.add = "image";
         }
+        else{
+            clone.querySelector('.meal').style.opacity = "1";
+        }
+        clone.querySelector('img').src = imglink + "small/" + elem.image + "-sm.jpg";
+        console.log(elem.discount);
+        if(elem.discount === 0){
+           clone.querySelector('.discount').style.display = "none"; 
+        }
+        else{
+            clone.querySelector('.discount').textContent = elem.discount + "% off";
+            clone.querySelector('.price').style.textDecorationLine = "line-through";
+        }
+        clone.querySelector('.name').textContent = elem.name;
+        if(elem.vegetarian === true){
+            clone.querySelector('.name').innerHTML += '<a class="vege">&#9679;</a>'
+        }
+        else{
+            clone.querySelector('.name').innerHTML += " ";
+        }
+        if(elem.alcohol > 0)
+            {
+                clone.querySelector('.alco').textContent = "with alcohol";
+            }
+        else{
+            clone.querySelector('.alco').style.display = "none";
+        }
+        clone.querySelector('.price').innerHTML = elem.price + "&#46;&#45;";
+        clone.querySelector('.short-description').textContent = elem.shortdescription;
         mealsContainer.appendChild(clone);
     })
 }
