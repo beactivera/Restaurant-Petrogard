@@ -24,23 +24,23 @@ main section {
     grid-template-columns: repeat(auto-fill, minmax(20em, 1fr));
     grid-gap: 0.3em;
 }
-
+div{
+    text-align: center;
+}
+div h2:hover{
+    color: red;
+}
 section h2 {
     grid-column: 1/-1;
     text-transform: capitalize;
     font-size: 35px;
+    color: #430b0e;
+    text-align: center;
 }
 
 section .short-description {
     font-size: 20px;
 }
-
-@media screen and (min-width: 600px) {
-    section h2 {
-        font-size: 45px;
-    }
-}
-
 .meal {
     position: relative;
     border: 1px solid #430b0e;
