@@ -21,11 +21,15 @@ body{
    font-size: 30px;
     color: #430b0e;
 }
-.container{
+main section{
         display: grid;
-        grid-template-columns: repeat(auto-fill, minmax(18em,1fr));
+        grid-template-columns: repeat(auto-fill, minmax(20em,1fr));
         grid-gap: 1em;
     }
+section h2{
+    grid-column: 1/-1;
+    text-transform: capitalize;
+}
 .meal{
     position: relative;
     border: 1px solid #430b0e;
@@ -164,7 +168,7 @@ footer{
     width: 100%;
 }
 
-@media screen and (min-width: 500px){
+@media screen and (min-width: 600px){
    
     .container{
         display: grid;
@@ -195,7 +199,7 @@ footer{
         font-size: 35px;
     }
 }
-@media screen and (min-width: 900px){
+@media screen and (min-width: 1000px){
    
     nav{
         display: inline-block;

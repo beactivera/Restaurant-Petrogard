@@ -1,75 +1,74 @@
 /////////////////////////dynamic////////////////////////////////////////////////
-let categoryContainer = document.querySelector('#categories');
-const catTemplate = document.querySelector('#categoryTemplate').content;
+
 let mealsContainer = document.querySelector('#meals');
 const template = document.querySelector('#mealTemplate').content;
 
-const linkCat = "http://kea-alt-del.dk/t5/api/categories"
-const link = "http://kea-alt-del.dk/t5/api/productlist";
+const catLink = "http://kea-alt-del.dk/t5/api/categories"
+const pListLink = "http://kea-alt-del.dk/t5/api/productlist";
 const imglink = "http://kea-alt-del.dk/t5/site/imgs/";
 
-fetch(linkCat).then(result => result.json()).then(cats => categorize(cats));
+fetch(catLink).then(result => result.json()).then(data => createCatContainers(data));
 
-function categorize(cats) {
-    cats.forEach(cat => {
-        console.log(cat);
-        const cloneCat = catTemplate.cloneNode(true);
-        cloneCat.querySelector('h2').textContent = cat;
+function createCatContainers(categories) {
+    categories.forEach(category => {
+        const section = document.createElement('section');
+        const h2 = document.createElement('h2');
+        section.id = category;
+        h2.textContent = category;
+        section.appendChild(h2);
+        mealsContainer.appendChild(section);
 
-        categoryContainer.appendChild(cloneCat);
-    })
+    });
+    fetch(pListLink).then(result => result.json()).then(data => showProduct(data));
+
 }
 
-fetch(link).then(result => result.json()).then(productlist => show(productlist));
-
-function show(data) {
+function showProduct(data) {
     data.forEach(elem => {
+        const section = document.querySelector('#' + elem.category);
         console.log(elem.name);
         console.log(elem.category);
         const clone = template.cloneNode(true);
-        if(elem.soldout === true){
+        if (elem.soldout === true) {
             const newImage = document.createElement('img');
             newImage.setAttribute('src', 'imgs/sold-2.png');
             clone.querySelector('.meal').appendChild(newImage);
-        }
-        else{
+        } else {
             clone.querySelector('.meal').style.opacity = "1";
         }
         clone.querySelector('img').src = imglink + "small/" + elem.image + "-sm.jpg";
         console.log(elem.discount);
-        if(elem.discount === 0){
-           clone.querySelector('.discount').style.visibility = "hidden"; 
-        }
-        else{
+        if (elem.discount === 0) {
+            clone.querySelector('.discount').style.visibility = "hidden";
+        } else {
             clone.querySelector('.discount').textContent = elem.discount + "% off";
         }
         clone.querySelector('.name').textContent = elem.name;
-        if(elem.vegetarian === true){
+        if (elem.vegetarian === true) {
             clone.querySelector('.name').innerHTML += '<a class="vege">&#9679;</a>'
-        }
-        else{
+        } else {
             clone.querySelector('.name').innerHTML += " ";
         }
-        if(elem.alcohol) // elem.alcohol > 0
-            {
-                clone.querySelector('.alco').textContent = "with alcohol";
-            }
-        else{
+        if (elem.alcohol) // elem.alcohol > 0
+        {
+            clone.querySelector('.alco').textContent = "with alcohol";
+        } else {
             clone.querySelector('.alco').style.display = "none";
         }
         clone.querySelector('.price span').textContent = elem.price;
-        if(elem.discount){
+        if (elem.discount) {
             console.log(elem.name + " has a discount");
-            const newPrice = Math.ceil(elem.price - elem.price * elem.discount /100);
+            const newPrice = Math.ceil(elem.price - elem.price * elem.discount / 100);
             clone.querySelector('.price span').classList.add('old-price');
             clone.querySelector(".discount-price.hide").classList.remove('hide');
             clone.querySelector(".discount-price span").textContent = newPrice;
         }
         clone.querySelector('.short-description').textContent = elem.shortdescription;
         clone.querySelector('button');
-        mealsContainer.appendChild(clone);
+        section.appendChild(clone);
     })
 }
+
 
 //////////////////////end of dynamic////////////////////////////////////////////
 
