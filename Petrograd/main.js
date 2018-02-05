@@ -28,8 +28,9 @@ function show(data) {
         console.log(elem.category);
         const clone = template.cloneNode(true);
         if(elem.soldout === true){
-            clone.querySelector('.meal').style.opacity = "0.4";
-            clone.querySelector('.meal').classList.add = "image";
+            const newImage = document.createElement('img');
+            newImage.setAttribute('src', 'imgs/sold-2.png');
+            clone.querySelector('.meal').appendChild(newImage);
         }
         else{
             clone.querySelector('.meal').style.opacity = "1";
@@ -37,11 +38,10 @@ function show(data) {
         clone.querySelector('img').src = imglink + "small/" + elem.image + "-sm.jpg";
         console.log(elem.discount);
         if(elem.discount === 0){
-           clone.querySelector('.discount').style.display = "none"; 
+           clone.querySelector('.discount').style.visibility = "hidden"; 
         }
         else{
             clone.querySelector('.discount').textContent = elem.discount + "% off";
-            clone.querySelector('.price').style.textDecorationLine = "line-through";
         }
         clone.querySelector('.name').textContent = elem.name;
         if(elem.vegetarian === true){
@@ -50,15 +50,23 @@ function show(data) {
         else{
             clone.querySelector('.name').innerHTML += " ";
         }
-        if(elem.alcohol > 0)
+        if(elem.alcohol) // elem.alcohol > 0
             {
                 clone.querySelector('.alco').textContent = "with alcohol";
             }
         else{
             clone.querySelector('.alco').style.display = "none";
         }
-        clone.querySelector('.price').innerHTML = elem.price + "&#46;&#45;";
+        clone.querySelector('.price span').textContent = elem.price;
+        if(elem.discount){
+            console.log(elem.name + " has a discount");
+            const newPrice = Math.ceil(elem.price - elem.price * elem.discount /100);
+            clone.querySelector('.price span').classList.add('old-price');
+            clone.querySelector(".discount-price.hide").classList.remove('hide');
+            clone.querySelector(".discount-price span").textContent = newPrice;
+        }
         clone.querySelector('.short-description').textContent = elem.shortdescription;
+        clone.querySelector('button');
         mealsContainer.appendChild(clone);
     })
 }

@@ -34,14 +34,9 @@ body{
     text-align: center;
     background-color: #fbfbe1;
 }
-.image{
-    background-image: url(/imgs/sold-2.png);
-    background-repeat: no-repeat;
-    background-size: contain;
-    
-}
-.sold-out{
-    opacity: 0.4;
+button{
+    font-size: 15px;
+    padding: 10px;
 }
 img{
     display: block;
@@ -53,14 +48,25 @@ img{
     margin: 0;
     color: #430b0e;
 }
-.discount{
+.discount, discount-price{
     margin: 10px;
     font-size: 25px;
     border: 3px solid #430b0e;
 }
+.hide{
+    display: none;
+}
+
 .old-price{
     font-size: 20px;
     text-decoration-line: line-through;
+    color: #430b0e;
+}
+.price, .discount-price{
+    position: relative;
+    text-align: center;
+    padding: 5px;
+    font-size: 30px;
     color: #430b0e;
 }
 ol{
@@ -72,6 +78,9 @@ li{
     display: inline-block;
     font-size: 30px;
 }
+h3{
+    display: inline;
+}
 h4{
     padding: 0;
     margin: 0;
@@ -82,13 +91,6 @@ h4{
 .alco{
     color: red;
     margin-bottom: 10px;
-}
-.price{
-    position: relative;
-    text-align: center;
-    padding: 5px;
-    font-size: 30px;
-    color: #430b0e;
 }
 .modal{
     display: none;
