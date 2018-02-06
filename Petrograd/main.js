@@ -2,6 +2,7 @@
 
 let mealsContainer = document.querySelector('#meals');
 const template = document.querySelector('#mealTemplate').content;
+const nav = document.querySelector('nav');
 
 const catLink = "http://kea-alt-del.dk/t5/api/categories"
 const pListLink = "http://kea-alt-del.dk/t5/api/productlist";
@@ -10,26 +11,32 @@ const imglink = "http://kea-alt-del.dk/t5/site/imgs/";
 fetch(catLink).then(result => result.json()).then(cats => createCategoryContainer(cats));
 
 function createCategoryContainer(cats) {
+    cats.unshift('menu');
     cats.forEach(cat => {
-        const categoryContainer = document.createElement('div');
-        const h2Cat = document.createElement('h2');
-        h2Cat.textContent = cat + " >";
+        const a = document.createElement('a');
+        a.textContent = cat;
+        a.href = "#";
+        a.addEventListener('click', () => filter(cat)) // name: filter - for filtring not only for categories
+        // ()=> this is the same like : 
+        //  function(){ filter(cat) }
+        nav.appendChild(a);
         const section = document.createElement('section');
         const h2 = document.createElement('h2');
         section.id = cat;
         h2.textContent = cat;
         section.classList.add('hide');
-        
-        categoryContainer.addEventListener('click', showCategory);
-        
-        function showCategory(){
-             if(section.id === cat)
-                 section.classList.remove('hide');
-              h2Cat.style.textDecoration = "underline";
+
+        function filter(myFilter) {
+            //console.log(myFilter); // == category
+            document.querySelectorAll('main section').forEach(section => {
+                if (section.id == myFilter) {
+                    section.classList.remove('hide');
+                } else {
+                    section.classList.add('hide');
+                }
+            })
         }
-        
-        categoryContainer.appendChild(h2Cat);
-        mealsContainer.appendChild(categoryContainer);
+
         section.appendChild(h2);
         mealsContainer.appendChild(section);
 
@@ -83,7 +90,7 @@ function showProduct(data) {
         section.appendChild(clone);
     })
 }
-         
+
 
 
 //////////////////////end of dynamic////////////////////////////////////////////

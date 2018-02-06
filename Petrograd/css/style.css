@@ -10,9 +10,10 @@ header {
     background-color: #430b0e;
 }
 
-nav {
-    display: none;
+nav a {
+    padding: 10px;
 }
+
 
 body {
     background-color: #fbfbe1;
