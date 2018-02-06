@@ -11,7 +11,7 @@ const imglink = "http://kea-alt-del.dk/t5/site/imgs/";
 fetch(catLink).then(result => result.json()).then(cats => createCategoryContainer(cats));
 
 function createCategoryContainer(cats) {
-    cats.unshift('menu');
+     cats.unshift('menu');
     cats.forEach(cat => {
         const a = document.createElement('a');
         a.textContent = cat;
