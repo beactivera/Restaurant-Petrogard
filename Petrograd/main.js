@@ -11,7 +11,7 @@ const imglink = "http://kea-alt-del.dk/t5/site/imgs/";
 fetch(catLink).then(result => result.json()).then(cats => createCategoryContainer(cats));
 
 function createCategoryContainer(cats) {
-     cats.unshift('menu');
+    cats.unshift('menu');
     cats.forEach(cat => {
         const a = document.createElement('a');
         a.textContent = cat;
@@ -29,7 +29,9 @@ function createCategoryContainer(cats) {
         function filter(myFilter) {
             //console.log(myFilter); // == category
             document.querySelectorAll('main section').forEach(section => {
-                if (section.id == myFilter) {
+                if(section.id){
+                    section.classList.remove('hide');
+                } else if (section.id == myFilter) {
                     section.classList.remove('hide');
                 } else {
                     section.classList.add('hide');
@@ -81,7 +83,8 @@ function showProduct(data) {
         if (elem.discount) {
             console.log(elem.name + " has a discount");
             const newPrice = Math.ceil(elem.price - elem.price * elem.discount / 100);
-            clone.querySelector('.price span').classList.add('old-price');
+            clone.querySelector('h3').classList.add('old-price');
+            clone.querySelector('h3').classList.remove('price');
             clone.querySelector(".discount-price.hide").classList.remove('hide');
             clone.querySelector(".discount-price span").textContent = newPrice;
         }
