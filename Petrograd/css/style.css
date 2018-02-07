@@ -1,4 +1,4 @@
-header{
+header {
     padding: 100px;
     width: auto;
     height: 150px;
@@ -7,14 +7,15 @@ header{
     opacity: 0.3;
     z-index: 2;
 }
-.title{
+
+.title {
     text-align: center;
     font-size: 50px;
     font-weight: bold;
     color: #430b0e;
 }
 
-ul{
+ul {
     position: absolute;
     display: inline-block;
     top: 0;
@@ -27,7 +28,8 @@ ul{
     background-color: #430b0e;
 }
 
-#nav li{
+#nav li {
+    display: inline-block;
     padding: 5px;
     padding-right: 50px;
     padding-left: 10px;
@@ -42,7 +44,7 @@ body {
     font-family: 'Ubuntu', sans-serif;
 }
 
-nav{
+nav {
     margin: 20px;
     padding: 20px;
     text-align: center;
@@ -57,7 +59,7 @@ nav a {
     text-decoration: none;
 }
 
-nav a:hover{
+nav a:hover {
     padding: 12px;
     color: #fbfbe1;
     border: 2px;
@@ -65,7 +67,7 @@ nav a:hover{
     background: #645b54;
 }
 
-nav a:focus{
+nav a:focus {
     padding: 10px;
     color: #fbfbe1;
     border: 2px;
@@ -73,7 +75,7 @@ nav a:focus{
     background: #645b54;
 }
 
-main section{
+main section {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(20em, 1fr));
     grid-gap: 0.3em;
@@ -91,6 +93,7 @@ section .short-description {
     position: relative;
     font-size: 18px;
 }
+
 .meal {
     position: relative;
     border: 1px solid #430b0e;
@@ -101,7 +104,7 @@ section .short-description {
 }
 
 button {
-    position:relative;
+    position: relative;
     bottom: 3px;
     justify-content: center;
     font-size: 15px;
@@ -151,13 +154,13 @@ discount-price {
     color: #430b0e;
 }
 
-ol{
+ol {
     list-style-type: none;
     padding: 0;
     color: #430b0e;
 }
 
-li{
+li {
     display: inline-block;
     font-size: 30px;
 }

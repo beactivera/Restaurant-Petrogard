@@ -13,6 +13,7 @@ fetch(catLink).then(result => result.json()).then(cats => createCategoryContaine
 function createCategoryContainer(cats) {
     cats.unshift('menu');
     cats.forEach(cat => {
+        // add category filter
         const a = document.createElement('a');
         a.textContent = cat;
         a.href = "#";
@@ -20,6 +21,7 @@ function createCategoryContainer(cats) {
         // ()=> this is the same like : 
         //  function(){ filter(cat) }
         nav.appendChild(a);
+        
         const section = document.createElement('section');
         const h2 = document.createElement('h2');
         section.id = cat;
@@ -53,6 +55,23 @@ function showProduct(data) {
         console.log(elem.name);
         console.log(elem.category);
         const clone = template.cloneNode(true);
+        // add vegetarian filter
+//        aVege = document.createElement('a');
+//        aVege.href= "#";
+//        aVege.textContent = 'vegetarian';
+//        aVege.addEventListener('click', ()=> showVege(elem.vegetarian));
+//        clone.querySelector('.meal').classList.add('hide');
+//        
+//        function showVege(myFilter){
+//            if(myFilter){
+//                clone.querySelector('.meal').classList.remove('hide')
+//            }else{
+//                clone.querySelector('.meal').classList.add('hide');
+//            }
+//            
+//        }
+//         aVege.appendChild(nav);
+        
         if (elem.soldout === true) {
             const newImage = document.createElement('img');
             newImage.setAttribute('src', 'imgs/sold-2.png');
