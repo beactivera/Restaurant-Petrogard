@@ -29,7 +29,7 @@ function createCategoryContainer(cats) {
         function filter(myFilter) {
             //console.log(myFilter); // == category
             document.querySelectorAll('main section').forEach(section => {
-                if(section.id){
+                if(section.id && myFilter ==='menu'){
                     section.classList.remove('hide');
                 } else if (section.id == myFilter) {
                     section.classList.remove('hide');
