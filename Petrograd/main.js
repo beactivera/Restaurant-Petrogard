@@ -3,9 +3,11 @@
 let mealsContainer = document.querySelector('#meals');
 const template = document.querySelector('#mealTemplate').content;
 const nav = document.querySelector('nav');
+const modal =document.querySelector('#modal');
 
 const catLink = "http://kea-alt-del.dk/t5/api/categories"
 const pListLink = "http://kea-alt-del.dk/t5/api/productlist";
+const pLink = "http://kea-alt-del.dk/t5/api/product?id=";
 const imglink = "http://kea-alt-del.dk/t5/site/imgs/";
 
 fetch(catLink).then(result => result.json()).then(cats => createCategoryContainer(cats));
@@ -51,9 +53,10 @@ function createCategoryContainer(cats) {
 
 function showProduct(data) {
     data.forEach(elem => {
+        console.log(elem);  // every element has an id
         const section = document.querySelector('#' + elem.category);
-        console.log(elem.name);
-        console.log(elem.category);
+        //console.log(elem.name);
+        //console.log(elem.category);
         const clone = template.cloneNode(true);
         // add vegetarian filter
 //        aVege = document.createElement('a');
@@ -80,7 +83,7 @@ function showProduct(data) {
             clone.querySelector('.meal').style.opacity = "1";
         }
         clone.querySelector('img').src = imglink + "small/" + elem.image + "-sm.jpg";
-        console.log(elem.discount);
+        //console.log(elem.discount);
         if (elem.discount === 0) {
             clone.querySelector('.discount').style.visibility = "hidden";
         } else {
@@ -100,7 +103,7 @@ function showProduct(data) {
         }
         clone.querySelector('.price span').textContent = elem.price;
         if (elem.discount) {
-            console.log(elem.name + " has a discount");
+            //console.log(elem.name + " has a discount");
             const newPrice = Math.ceil(elem.price - elem.price * elem.discount / 100);
             clone.querySelector('h3').classList.add('old-price');
             clone.querySelector('h3').classList.remove('price');
@@ -108,9 +111,28 @@ function showProduct(data) {
             clone.querySelector(".discount-price span").textContent = newPrice;
         }
         clone.querySelector('.short-description').textContent = elem.shortdescription;
-        clone.querySelector('button');
+        clone.querySelector('button').addEventListener('click', ()=>{
+            fetch(pLink+elem.id).then(result => result.json()).then(product => showMore(product));
+        });
         section.appendChild(clone);
     })
+}
+
+modal.addEventListener('click', ()=>modal.classList.add('hide'));
+
+function showMore(product){
+    //console.log(product);
+    //modal content
+    //modal.querySelector('.img-desc').src = imglink + "medium/" + product.image + "-md.jpg";
+    if(product.vegetarian === 'true'){
+        modal.querySelector('.name-description').textContent = product.name;
+        modal.querySelector('.name-description').innerHTML += '<a class="vege">&#9679;</a>'; 
+    } else{
+        modal.querySelector('.name-description').textContent = product.name; 
+    }
+    modal.querySelector('.name-description').textContent=product.name;
+    modal.querySelector('.long-description').textContent=product.longdescription;
+    modal.classList.remove('hide');
 }
 
 
