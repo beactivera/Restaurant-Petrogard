@@ -2,8 +2,8 @@
 
 let mealsContainer = document.querySelector('#meals');
 const template = document.querySelector('#mealTemplate').content;
-const nav = document.querySelector('nav');
-const modal =document.querySelector('#modal');
+const nav = document.querySelector('nav ul');
+const modal = document.querySelector('#modal');
 
 const catLink = "http://kea-alt-del.dk/t5/api/categories"
 const pListLink = "http://kea-alt-del.dk/t5/api/productlist";
@@ -22,8 +22,10 @@ function createCategoryContainer(cats) {
         a.addEventListener('click', () => filter(cat)) // name: filter - for filtring not only for categories
         // ()=> this is the same like : 
         //  function(){ filter(cat) }
-        nav.appendChild(a);
-        
+        const li = document.createElement('li');
+        li.appendChild(a);
+        nav.appendChild(li);
+
         const section = document.createElement('section');
         const h2 = document.createElement('h2');
         section.id = cat;
@@ -33,7 +35,7 @@ function createCategoryContainer(cats) {
         function filter(myFilter) {
             //console.log(myFilter); // == category
             document.querySelectorAll('main section').forEach(section => {
-                if(section.id && myFilter ==='menu'){
+                if (section.id && myFilter === 'menu') {
                     section.classList.remove('hide');
                 } else if (section.id == myFilter) {
                     section.classList.remove('hide');
@@ -53,28 +55,28 @@ function createCategoryContainer(cats) {
 
 function showProduct(data) {
     data.forEach(elem => {
-        console.log(elem);  // every element has an id
+        //console.log(elem);  // every element has an id
         const section = document.querySelector('#' + elem.category);
         //console.log(elem.name);
         //console.log(elem.category);
         const clone = template.cloneNode(true);
         // add vegetarian filter
-//        aVege = document.createElement('a');
-//        aVege.href= "#";
-//        aVege.textContent = 'vegetarian';
-//        aVege.addEventListener('click', ()=> showVege(elem.vegetarian));
-//        clone.querySelector('.meal').classList.add('hide');
-//        
-//        function showVege(myFilter){
-//            if(myFilter){
-//                clone.querySelector('.meal').classList.remove('hide')
-//            }else{
-//                clone.querySelector('.meal').classList.add('hide');
-//            }
-//            
-//        }
-//         aVege.appendChild(nav);
-        
+        //        aVege = document.createElement('a');
+        //        aVege.href= "#";
+        //        aVege.textContent = 'vegetarian';
+        //        aVege.addEventListener('click', ()=> showVege(elem.vegetarian));
+        //        clone.querySelector('.meal').classList.add('hide');
+        //        
+        //        function showVege(myFilter){
+        //            if(myFilter){
+        //                clone.querySelector('.meal').classList.remove('hide')
+        //            }else{
+        //                clone.querySelector('.meal').classList.add('hide');
+        //            }
+        //            
+        //        }
+        //         aVege.appendChild(nav);
+
         if (elem.soldout === true) {
             const newImage = document.createElement('img');
             newImage.setAttribute('src', 'imgs/sold-2.png');
@@ -105,34 +107,39 @@ function showProduct(data) {
         if (elem.discount) {
             //console.log(elem.name + " has a discount");
             const newPrice = Math.ceil(elem.price - elem.price * elem.discount / 100);
-            clone.querySelector('h3').classList.add('old-price');
+            clone.querySelector('h3').classList.add('old-price'); // only this class will go to the first h3
             clone.querySelector('h3').classList.remove('price');
             clone.querySelector(".discount-price.hide").classList.remove('hide');
             clone.querySelector(".discount-price span").textContent = newPrice;
         }
         clone.querySelector('.short-description').textContent = elem.shortdescription;
-        clone.querySelector('button').addEventListener('click', ()=>{
-            fetch(pLink+elem.id).then(result => result.json()).then(product => showMore(product));
+        clone.querySelector('button').addEventListener('click', () => {
+            fetch(pLink + elem.id).then(result => result.json()).then(product => showMore(product));
         });
         section.appendChild(clone);
     })
 }
 
-modal.addEventListener('click', ()=>modal.classList.add('hide'));
+modal.addEventListener('click', () => modal.classList.add('hide'));
 
-function showMore(product){
-    //console.log(product);
+function showMore(product) {
+    console.log(product);
     //modal content
-    //modal.querySelector('.img-desc').src = imglink + "medium/" + product.image + "-md.jpg";
-    if(product.vegetarian === 'true'){
-        modal.querySelector('.name-description').textContent = product.name;
-        modal.querySelector('.name-description').innerHTML += '<a class="vege">&#9679;</a>'; 
-    } else{
-        modal.querySelector('.name-description').textContent = product.name; 
-    }
-    modal.querySelector('.name-description').textContent=product.name;
-    modal.querySelector('.long-description').textContent=product.longdescription;
     modal.classList.remove('hide');
+    modal.querySelector('.image-desc').src = imglink + "medium/" + product.image + "-md.jpg";
+    modal.querySelector('.name-description').textContent = product.name;
+    if (product.vegetarian === true ) {
+        modal.querySelector('.name-description').innerHTML += '<a class="vege">&#9679;</a>';
+    } else {
+        modal.querySelector('.name-description').innerHTML += " ";
+    }
+    if (product.alcohol) // elem.alcohol > 0
+        {
+            modal.querySelector('.alco').textContent = "with alcohol";
+        } else {
+            modal.querySelector('.alco').style.display = "none";
+        }
+    modal.querySelector('.long-description').textContent = product.longdescription;
 }
 
 
