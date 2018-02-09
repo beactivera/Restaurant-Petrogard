@@ -140,6 +140,22 @@ function showMore(product) {
             modal.querySelector('.alco').style.display = "none";
         }
     modal.querySelector('.long-description').textContent = product.longdescription;
+    //modal.querySelector('.price').textContent = "discount";
+    //modal.querySelector('.price').style.color = "#8b101a"
+        if (product.discount) {
+            modal.querySelector('.price').textContent = "discount";
+            modal.querySelector('.price').style.color = "#8b101a";
+            modal.querySelector('.price').style.visibility = 'visible';
+            //console.log(elem.name + " has a discount");
+            const newPrice = Math.ceil(product.price - product.price * product.discount / 100);
+            modal.querySelector(".discount-price").classList.remove('hide');
+            modal.querySelector(".discount-price span").textContent = newPrice;
+        } else{
+            const newPrice = product.price;
+            modal.querySelector('.price').style.visibility = 'hidden';
+            modal.querySelector(".discount-price").classList.remove('hide');
+            modal.querySelector(".discount-price span").textContent = newPrice;
+        }
 }
 
 

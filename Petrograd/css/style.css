@@ -260,7 +260,7 @@ h4 {
     margin: auto;
     padding: 20px;
     width: 80vw;
-    height: 50vh;
+    height: 80vh;
     background-color: #fefefe;
 }
 
@@ -272,7 +272,7 @@ h4 {
 
 .image-desc {
     position: relative;
-    width: 90%;
+    width: 75%;
 }
 
 .name-description {
